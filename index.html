@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Screenshot Dashboard</title>
+    <!-- <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css"> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/css/materialize.min.css">
+    <link rel="stylesheet" src="./main.css">
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+    <script type="text/javascript" href="./index.js">
+      $(document).ready(()=>{
+        $("#form").on("submit", (e)=>{
+          e.preventDefault()
+          var urlArray = $("input[name='urlArray']").val()
+          urlArray = JSON.stringify(urlArray)
+          var settings = {
+            "async": true,
+            "crossDomain": true,
+            "url": "http://localhost:8080/screenshot",
+            "method": "POST",
+            "headers": {
+              "content-type": "application/x-www-form-urlencoded",
+              "cache-control": "no-cache",
+              "postman-token": "4393d762-244f-3768-55c1-dec8a6a2f292"
+            },
+            "data": {"urlArray": urlArray}
+          }
+
+          $.ajax(settings).done(function (response) {
+            console.log(response);
+          });
+        })
+      })
+    </script>
+    <style>
+        body { padding-top:50px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="form_container">
+          <form action="/csv" method="post" id="csv_form">
+            <!-- <input name="urlArray" type="text" id="url_array_input" placeholder="['www.example.com', 'www.example_two.com']"></input> -->
+            <label>Upload CSV here</label
+            <input type="file" name="pic" accept=".csv"/>
+            <button id="url_array_button">Screenshot These Urls</button>
+          </form>
+        </div>
+    </div>
+</body>
+</html>
